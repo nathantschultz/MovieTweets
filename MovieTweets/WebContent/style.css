@@ -10,9 +10,21 @@ h2 {
     font-size: 1em;
 }
 
+li {
+	border: solid;
+	padding: 5px;
+	margin: 20px;
+	width: 200px;
+	list-style-type: none;
+	float: left;
+	border-width: 1px;
+	border-color: lightblue;
+}
+
+
 select {
     background: transparent;
-    width: 268px;
+    width: 328px;
     padding: 5px;
     font-size: 16px;
     line-height: 1;
@@ -23,10 +35,10 @@ select {
 }
 
 .styled-select {
-   width: 240px;
+   width: 300px;
    height: 34px;
    overflow: hidden;
-   background: url(arrow.png) no-repeat right white;
+   background: url(images/arrow.png) no-repeat right white;
    border: 1px solid #ccc;
    margin: 100px;
    }
