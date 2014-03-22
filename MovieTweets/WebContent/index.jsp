@@ -38,7 +38,7 @@
     <div class="header">
         <div class="left">
             <form name="myform" action="http://www.mydomain.com/myformhandler.cgi" method="POST">
-                <div class="styled-select">
+                <div id="movie" class="styled-select">
                     <select name="mydropdown">
                         <option selected="selected" disabled="disabled">Select a Movie</option>
                         <option value="robocop">Robocop</option>
