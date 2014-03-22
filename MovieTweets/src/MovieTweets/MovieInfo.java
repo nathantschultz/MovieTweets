@@ -40,7 +40,7 @@ public class MovieInfo extends HttpServlet {
 //		System.out.println(key + ": " + map.get(key));
 //		}
 		request.setAttribute("info", map);
-		request.getRequestDispatcher("/movieInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	/**
