@@ -1,0 +1,68 @@
+/* css reset -------------------------------------------------------------------------------*/
+/** * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/) * Richard Clark (http://richclarkdesign.com) * http://cssreset.com */html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn, em, img, ins, kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, figcaption, figure,footer, header, hgroup, menu, nav, section, summary,time, mark, audio, video {    margin:0;    padding:0;    border:0;    outline:0;    font-size:100%;    vertical-align:baseline;    background:transparent;}body {    line-height:1;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {    display:block;}nav ul {    list-style:none;}blockquote, q {    quotes:none;}blockquote:before, blockquote:after,q:before, q:after {    content:'';    content:none;}a {    margin:0;    padding:0;    font-size:100%;    vertical-align:baseline;    background:transparent;}/* change colours to suit your needs */ins {    background-color:#ff9;    color:#000;    text-decoration:none;}/* change colours to suit your needs */mark {    background-color:#ff9;    color:#000;    font-style:italic;    font-weight:bold;}del {    text-decoration: line-through;}abbr[title], dfn[title] {    border-bottom:1px dotted;    cursor:help;}table {    border-collapse:collapse;    border-spacing:0;}/* change border colour to suit your needs */hr {    display:block;    height:1px;    border:0;    border-top:1px solid #cccccc;    margin:1em 0;    padding:0;}input, select {    vertical-align:middle;}
+
+
+h1 {
+    font-size: 5em;
+}
+
+h2 {
+    font-size: 1em;
+}
+
+select {
+    background: transparent;
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+}
+
+.styled-select {
+   width: 240px;
+   height: 34px;
+   overflow: hidden;
+   background: url(arrow.png) no-repeat right white;
+   border: 1px solid #ccc;
+   margin: 100px;
+   }
+
+#welcome {
+    padding-top: 200px;
+}
+
+.header {
+    width: 100%;
+    height: 250px;
+    
+    background: #002db4; /* Old browsers */
+    background: -moz-linear-gradient(left,  #002db4 0%, #9800ca 52%, #ea0400 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#002db4), color-stop(52%,#9800ca), color-stop(100%,#ea0400)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  #002db4 0%,#9800ca 52%,#ea0400 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  #002db4 0%,#9800ca 52%,#ea0400 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  #002db4 0%,#9800ca 52%,#ea0400 100%); /* IE10+ */
+    background: linear-gradient(to right,  #002db4 0%,#9800ca 52%,#ea0400 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002db4', endColorstr='#ea0400',GradientType=1 ); /* IE6-9 */
+}
+
+.title {
+
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Avenir", sans-serif;
+    color: white;
+    padding: 35px;
+    text-align: right;
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+}
