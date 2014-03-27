@@ -1,29 +1,47 @@
 package MovieTweets;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 public class Testing {
 
-		
-	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
-		String location = "83440";
-		URL url = new URL("http://www.google.com/movies?hl=en&near=" + location);
-		
-		System.out.println(url);
-		
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String, Object> map = mapper.readValue(url, Map.class);
-		
-		for (String key : map.keySet())
-		{
-		System.out.println(key + ": " + map.get(key));
-		}
-	}		
+    public static void main(String[] args){
+    	
+        String string="";
+        String file ="savedMovies.txt";
+
+        //reading   
+        try{
+            InputStream ips=new FileInputStream(file); 
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
+            String line;
+            while ((line = br.readLine())!=null){
+                System.out.println(line);
+                string+=line+"\n";
+            }
+            br.close(); 
+        }       
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+        //writing
+        try {
+            FileWriter fw = new FileWriter (file);
+            BufferedWriter bw = new BufferedWriter (fw);
+            PrintWriter fileOut = new PrintWriter (bw); 
+                fileOut.println (string+"\n test of read and write !!"); 
+            fileOut.close();
+            System.out.println("the file " + file + " is created!"); 
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }       
+    }
 }
-	

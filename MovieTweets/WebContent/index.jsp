@@ -58,14 +58,19 @@
           //movieData is the thing that is going in, and it goes to the class "this"
           $(movieData).appendTo(".styled-select");
          }    
-         */
-      </script>
+ 		request.getRequestDispatcher("/index.jsp").forward(request, response);	
+
+      */</script>
+      
+
+      
+
     
 </head>
 <body>
     <div class="header">
         <div class="left">
-            <form name="myform" action="" method="POST">
+            <form name="myform" action="MovieInfo" method="GET">
                 <div class="styled-select">
 					<!-- This is where the movies from the above script will go-->
                 </div>
@@ -80,7 +85,12 @@
     <div class="content">
         <span id="welcome2"><h1 id="welcome">Welcome!</h1></span>
 
-    
+
+<input type="text" id="page_name" size="20">
+
+<div id="page_url">
+    Type in text input then click anywhere outside of it
+</div>
 
 <br/>
 <ul id="tweets">
