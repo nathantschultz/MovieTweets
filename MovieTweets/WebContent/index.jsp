@@ -14,7 +14,7 @@
  
  
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-      <script>
+	<script>/*
          var apikey = "regehcgurp4f3uhzrtej3f3b";
          var baseUrl = "http://data.tmsapi.com/v1";
          var showtimesUrl = baseUrl + '/movies/showings';
@@ -57,7 +57,7 @@
           //movieData is the thing that is going in, and it goes to the class "this"
           $(movieData).appendTo(".styled-select");
          }    
-         
+         */
       </script>
     
 </head>
