@@ -43,13 +43,27 @@
             if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </option>'};
           });
           movieData += '</select>';
-          $(document.body).append(movieData);
+          
+          //movieData is the thing that is going in, and it goes to the class "this"
+          $(movieData).appendTo(".divtwo");
          }
-                  
+         
+         
+
+         
       </script>
    </head>
    <body>
 
+	<div class="this">
+		<p>div one</p>
+	</div>
+	<div class="divtwo">
+		<p>div two</p>
+	</div>
+   	<div id="divthree">
+		<p>div three</p>
+	</div>
 	
    </body>
 </html>
