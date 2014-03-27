@@ -48,13 +48,6 @@
       </script>
    </head>
    <body>
-   	
-   	<div class="searchBox">
-    <h2>Search!</h2>
-    <form action="Movies" method="GET">
-        <input type="submit" value="search">
-    </form>
-	</div>
 	
 	<div>
 		<h3>Results</h3>
