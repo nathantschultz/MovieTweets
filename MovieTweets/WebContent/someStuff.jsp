@@ -35,26 +35,19 @@
           
          // callback to handle the results
          function dataHandler(data) {
-          $(document.body).append('<p>Found ' + data.length + ' movies showing within 10 miles of ' + zipCode+':</p>');
           var movies = data.hits;
+          var movieData = '<select name=movies>';
           $.each(data, function(index, movie) {
-            var movieData = '<div class="tile"><img src="http://tmsimg.com/' + movie.preferredImage.uri + '?api_key='+apikey+'"><br/>';
-            movieData += movie.title;
-            if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </div>' };
-            $(document.body).append(movieData);
+            movieData += '<option value=' + movie.title + '>' + movie.title + '</option>';
           });
+          movieData += '</select>';
+          $(document.body).append(movieData);
          }
             
       </script>
    </head>
    <body>
-	
-	<div>
-		<h3>Results</h3>
-		<c:forEach items="${mList}" var="movie">
-			<a href="MovieInfo?movie=${movie.Title}" >${movie.Title}</a><br />
-		</c:forEach>
-	</div>
+   
 	
    </body>
 </html>
