@@ -38,8 +38,14 @@
          function dataHandler(data) {
           var movies = data.hits;
           var movieData = '<select name=movies>';
+          
+          //goes through each movie in the list
           $.each(data, function(index, movie) {
+        	  
+        	//this is the title of the movie
             movieData += '<option value=' + movie.title + '>' + movie.title;
+            
+            //this gets the rating and puts it into the movieData
             if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </option>'};
           });
           movieData += '</select>';
