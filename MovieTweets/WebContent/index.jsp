@@ -14,26 +14,51 @@
  
  
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#movies').change(function(event) {  
-        var $movie=$("select#movies").val();
-           $.get('ActionServlet',{moviename:$movie},function(responseJson) {   
-            var $select = $('#tweets');                           
-               $select.find('li').remove();
-            var $welcome = $('#welcome2');
-            	$welcome.find('h1').remove();
-               $.each(responseJson, function(key, value) {               
-                   $('<li>').val(key).text(value).appendTo($select);      
-                    });
-            });
-        });
-    });          
-</script>
- 
- 
- 
-    
+      <script>
+         var apikey = "regehcgurp4f3uhzrtej3f3b";
+         var baseUrl = "http://data.tmsapi.com/v1";
+         var showtimesUrl = baseUrl + '/movies/showings';
+         var zipCode = "83440";
+         var d = new Date();
+         var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+
+         $(document).ready(function() {
+          
+           // send off the query
+           $.ajax({
+            url: showtimesUrl,
+                data: { startDate: today,
+                	radius: 10,
+                    zip: zipCode,
+                    jsonp: "dataHandler",
+                    api_key: apikey
+                   },          
+            dataType: "jsonp",
+           });
+         });
+             
+       
+         // callback to handle the results
+         function dataHandler(data) {
+          var movies = data.hits;
+          var movieData = '<select class="movies" name="mydropdown">';
+          
+          //goes through each movie in the list
+          $.each(data, function(index, movie) {
+        	  
+        	//this is the title of the movie
+            movieData += '<option value="' + movie.title + '">' + movie.title;
+            
+            //this gets the rating and puts it into the movieData
+            if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </option>'};
+          });
+          movieData += '</select>';
+          
+          //movieData is the thing that is going in, and it goes to the class "this"
+          $(movieData).appendTo(".styled-select");
+         }    
+         
+      </script>
     
 </head>
 <body>
@@ -41,12 +66,7 @@
         <div class="left">
             <form name="myform" action="" method="POST">
                 <div class="styled-select">
-                    <select id="movies" name="mydropdown">
-                        <option selected="selected" disabled="disabled">Select a Movie</option>
-                        <option value="robocop">Robocop</option>
-                        <option value="secret">The Secret Life of Walter Mitty</option>
-                        <option value="gravity">Gravity</option>
-                    </select>
+
                 </div>
             </form>
         </div>
