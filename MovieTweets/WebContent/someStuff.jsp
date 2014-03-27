@@ -33,21 +33,23 @@
            });
          });
           
+         
          // callback to handle the results
          function dataHandler(data) {
           var movies = data.hits;
           var movieData = '<select name=movies>';
           $.each(data, function(index, movie) {
-            movieData += '<option value=' + movie.title + '>' + movie.title + '</option>';
+            movieData += '<option value=' + movie.title + '>' + movie.title;
+            if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </option>'};
           });
           movieData += '</select>';
           $(document.body).append(movieData);
          }
-            
+                  
       </script>
    </head>
    <body>
-   
+
 	
    </body>
 </html>
