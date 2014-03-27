@@ -58,7 +58,6 @@
           //movieData is the thing that is going in, and it goes to the class "this"
           $(movieData).appendTo(".styled-select");
          }    
- 		request.getRequestDispatcher("/index.jsp").forward(request, response);	
 
       */</script>
       
