@@ -15,23 +15,24 @@
  
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>/*
-         var apikey = "regehcgurp4f3uhzrtej3f3b";
-         var baseUrl = "http://data.tmsapi.com/v1";
-         var showtimesUrl = baseUrl + '/movies/showings';
+         var url     = "http://data.tmsapi.com/v1/movies/showings";
+         var apikey  = "regehcgurp4f3uhzrtej3f3b";
+         var d       = new Date();
+         var today   = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();         
          var zipCode = "83440";
-         var d = new Date();
-         var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+         var radius  = "10";
 
          $(document).ready(function() {
           
            // send off the query
            $.ajax({
-            url: showtimesUrl,
-                data: { startDate: today,
-                	radius: 10,
-                    zip: zipCode,
-                    jsonp: "dataHandler",
-                    api_key: apikey
+            url: url,
+                data: { 
+                	api_key:   apikey,
+                	startDate: today,
+                    zip:       zipCode,
+                	radius:    radius,
+                    jsonp:     "dataHandler"
                    },          
             dataType: "jsonp",
            });
@@ -66,7 +67,7 @@
         <div class="left">
             <form name="myform" action="" method="POST">
                 <div class="styled-select">
-
+					<!-- This is where the movies from the above script will go-->
                 </div>
             </form>
         </div>
