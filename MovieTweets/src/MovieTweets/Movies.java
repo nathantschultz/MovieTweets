@@ -35,7 +35,7 @@ public class Movies extends HttpServlet {
         String baseUrl = "http://data.tmsapi.com/v1/movies/showings/?";
         String zipCode = "83440";
         
-        URL url = new URL(baseUrl + "startDate=" + "2014-3-24" + "&radius=10" + "&zip=" + zipCode + "&api_key=" + apikey);       
+        URL url = new URL(baseUrl + "startDate=" + "2014-3-27" + "&radius=10" + "&zip=" + zipCode + "&api_key=" + apikey);       
         
         System.out.println(url);
         
