@@ -2,6 +2,7 @@ package MovieTweets;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import twitter4j.*;
+
 
 /**
  * Servlet implementation class ActionServlet
@@ -20,6 +23,27 @@ import com.google.gson.Gson;
 public class ActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
+	public static List<String> search(String string) {
+        Twitter twitter = new TwitterFactory().getInstance();
+        List<String> movieTweets = null;
+        try {
+            Query query = new Query(string);
+            QueryResult result;
+            do {
+                result = twitter.search(query);
+                List<Status> tweets = result.getTweets();
+                for (Status tweet : tweets) {
+                	movieTweets.add("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                }
+            } while ((query = result.nextQuery()) != null);
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Failed to search tweets: " + te.getMessage());
+        }
+        return movieTweets;
+    }
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,6 +57,10 @@ public class ActionServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
     	 
+    	String movieName=request.getParameter("moviename");
+		List<String> tweets = search(movieName);
+    	
+    	
     	  String country=request.getParameter("moviename");
     	  	Map<String, String> robo = new LinkedHashMap<String, String>();
     	  	robo.put("1", "@weinerdog4life: Why did robocop have a mouth? Was it so he could kiss other robocops? I bet it was so he could kiss other robocops.");
@@ -53,16 +81,19 @@ public class ActionServlet extends HttpServlet {
     	     gravity.put("4", "@UCDan: Just watched Gravity for the first time. It really grounded me, but I wasn't moved.");
 
     	     
-    	     String json = null ;
-    	     if(country.equals("robocop")){
-    	      json= new Gson().toJson(robo);   
-    	     }
-    	     else if(country.equals("secret")){
-    	      json=new Gson().toJson(secret);  
-    	     }
-    	     else if(country.equals("gravity")){
-       	      json=new Gson().toJson(gravity);  
-       	     }
+//    	     String json = null ;
+//    	     if(country.equals("robocop")){
+//    	      json= new Gson().toJson(robo);   
+//    	     }
+//    	     else if(country.equals("secret")){
+//    	      json=new Gson().toJson(secret);  
+//    	     }
+//    	     else if(country.equals("gravity")){
+//       	      json=new Gson().toJson(gravity);  
+//       	     }
+		
+			String json = null;
+			json=new Gson().toJson(robo);  
 
     	     response.setContentType("application/json");
     	     response.setCharacterEncoding("UTF-8");

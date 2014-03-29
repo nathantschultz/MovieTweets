@@ -37,9 +37,9 @@ public class TwitterSearch extends HttpServlet {
             do {
                 result = twitter.search(query);
                 List<Status> tweets = result.getTweets();
-                for (Status tweet : tweets) {
-                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
-                }
+//                for (Status tweet : tweets) {
+//                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+//                }
             } while ((query = result.nextQuery()) != null);
             System.exit(0);
         } catch (TwitterException te) {

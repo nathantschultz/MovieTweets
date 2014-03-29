@@ -14,7 +14,7 @@
  
  
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>/*
+	<script>
          var url     = "http://data.tmsapi.com/v1/movies/showings";
          var apikey  = "regehcgurp4f3uhzrtej3f3b";
          var d       = new Date();
@@ -59,10 +59,24 @@
           $(movieData).appendTo(".styled-select");
          }    
 
-      */</script>
+      </script>
       
-
-      
+<script>
+    $(document).ready(function() {
+        $('#movies').change(function(event) {  
+        var $movie=$("select#movies").val();
+           $.get('ActionServlet',{moviename:$movie},function(responseJson) {   
+            var $select = $('#tweets');                           
+               $select.find('li').remove();
+            var $welcome = $('#welcome2');
+            	$welcome.find('h1').remove();
+               $.each(responseJson, function(key, value) {               
+                   $('<li>').val(key).text(value).appendTo($select);      
+                    });
+            });
+        });
+    });          
+</script>
 
     
 </head>
@@ -85,11 +99,6 @@
         <span id="welcome2"><h1 id="welcome">Welcome!</h1></span>
 
 
-<input type="text" id="page_name" size="20">
-
-<div id="page_url">
-    Type in text input then click anywhere outside of it
-</div>
 
 <br/>
 <ul id="tweets">
