@@ -57,11 +57,11 @@ public class ActionServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
     	 
-    	String movieName=request.getParameter("moviename");
-		List<String> tweets = search(movieName);
+//    	String movieName=request.getParameter("moviename");
+//		List<String> tweets = search(movieName);
     	
     	
-    	  String country=request.getParameter("moviename");
+    	 // String country=request.getParameter("moviename");
     	  	Map<String, String> robo = new LinkedHashMap<String, String>();
     	  	robo.put("1", "@weinerdog4life: Why did robocop have a mouth? Was it so he could kiss other robocops? I bet it was so he could kiss other robocops.");
     	  	robo.put("2", "@JoeyBurns87: Watching Robocop 2. Its chocker with bad hair and pointless handbrake turns. I love it.");
