@@ -24,17 +24,20 @@ public class ActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	public static List<String> search(String string) {
+	public static Map<String, String> search(String string) {
         Twitter twitter = new TwitterFactory().getInstance();
-        List<String> movieTweets = null;
+       
+        Map<String, String> movieTweets = new LinkedHashMap<String, String>();
         try {
             Query query = new Query(string);
             QueryResult result;
             do {
                 result = twitter.search(query);
                 List<Status> tweets = result.getTweets();
+                String num = "0";
                 for (Status tweet : tweets) {
-                	movieTweets.add("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                	movieTweets.put(num, "@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                	num += 1;
                 }
             } while ((query = result.nextQuery()) != null);
         } catch (TwitterException te) {
@@ -57,11 +60,11 @@ public class ActionServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
     	 
-//    	String movieName=request.getParameter("moviename");
-//		List<String> tweets = search(movieName);
+    	String movieName=request.getParameter("moviename");
+    	Map<String, String> tweets = search(movieName);
     	
     	
-    	 // String country=request.getParameter("moviename");
+    	  String country=request.getParameter("moviename");
     	  	Map<String, String> robo = new LinkedHashMap<String, String>();
     	  	robo.put("1", "@weinerdog4life: Why did robocop have a mouth? Was it so he could kiss other robocops? I bet it was so he could kiss other robocops.");
     	  	robo.put("2", "@JoeyBurns87: Watching Robocop 2. Its chocker with bad hair and pointless handbrake turns. I love it.");
@@ -80,7 +83,7 @@ public class ActionServlet extends HttpServlet {
     	     gravity.put("3", "@JulienMacdonald: Seeing gravity this evening.... Am i going to be blown away? #Gravity");
     	     gravity.put("4", "@UCDan: Just watched Gravity for the first time. It really grounded me, but I wasn't moved.");
 
-    	     
+//    	     
 //    	     String json = null ;
 //    	     if(country.equals("robocop")){
 //    	      json= new Gson().toJson(robo);   
@@ -92,8 +95,8 @@ public class ActionServlet extends HttpServlet {
 //       	      json=new Gson().toJson(gravity);  
 //       	     }
 		
-			String json = null;
-			json=new Gson().toJson(robo);  
+    	     String json = null;
+    	     json = new Gson().toJson(tweets);
 
     	     response.setContentType("application/json");
     	     response.setCharacterEncoding("UTF-8");
