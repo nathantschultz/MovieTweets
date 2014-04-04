@@ -1,6 +1,7 @@
 package MovieTweets;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,8 +64,8 @@ public class ActionServlet extends HttpServlet {
     	String movieName=request.getParameter("moviename");
     	Map<String, String> tweets = search(movieName);
     	
-    	
-
+    	Date now = new Date(); //the date
+		System.out.println(now);
 		
     	     String json = null;
     	     json = new Gson().toJson(tweets);
