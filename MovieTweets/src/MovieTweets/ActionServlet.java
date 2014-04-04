@@ -1,5 +1,7 @@
 package MovieTweets;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -22,11 +24,13 @@ import twitter4j.*;
  */
 @WebServlet("/ActionServlet")
 public class ActionServlet extends HttpServlet {
+    
 	private static final long serialVersionUID = 1L;
        
 	
 	public static Map<String, String> search(String string) {
-        Twitter twitter = new TwitterFactory().getInstance();
+        
+		Twitter twitter = new TwitterFactory().getInstance();
        
         Map<String, String> movieTweets = new LinkedHashMap<String, String>();
         try {
@@ -60,10 +64,23 @@ public class ActionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
-    	 
+        
+
+        
     	String movieName=request.getParameter("moviename");
     	Map<String, String> tweets = search(movieName);
     	
+    	File outputFile = new File(getServletContext().getRealPath("/")
+                + "savedTweets.txt");
+        FileWriter fout = new FileWriter(outputFile);
+        
+    	for (Map.Entry<String, String> entry : tweets.entrySet()) {
+    		fout.write(entry.getValue());
+    		fout.write("\r\n");
+    	}
+        
+        fout.close();
+        
     	Date now = new Date(); //the date
 		System.out.println(now);
 		
