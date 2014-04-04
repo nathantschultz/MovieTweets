@@ -65,7 +65,7 @@ public class ActionServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
         
-
+    	
         
     	String movieName=request.getParameter("moviename");
     	Map<String, String> tweets = search(movieName);
