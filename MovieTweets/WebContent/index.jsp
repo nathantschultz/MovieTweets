@@ -41,7 +41,6 @@
        
          // callback to handle the results
          function dataHandler(data) {
-          var movies = data.hits;
           var movieData = '<select id="movies" class="movies" name="mydropdown">';
           
           //goes through each movie in the list
@@ -53,13 +52,14 @@
             //this gets the rating and puts it into the movieData
             if (movie.ratings) { movieData += ' (' + movie.ratings[0].code + ') </option>'};
           });
+          
           movieData += '</select>';
           
           //movieData is the thing that is going in, and it goes to the class "this"
           $(movieData).appendTo(".styled-select");
-        
-         
-        //calls action servlet to collect tweets and remove welcome
+ 
+          
+           //calls action servlet to collect tweets and remove welcome
           $('#movies').change(function(event) {  
               var $movie=$("select#movies").val();
                  $.get('ActionServlet',{moviename:$movie},function(responseJson) {   
@@ -72,6 +72,11 @@
                           });
                   });
               });
+          
+   			//reading all current movie tweets into files
+  	      	$.each(data, function(index, movie) {
+  	  	      	$.get('TweetFile',{moviename:movie.title},function(responseJson) {});
+  	      	});
          
          }    
 

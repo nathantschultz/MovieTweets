@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,25 +19,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import twitter4j.*;
-
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 
 /**
- * Servlet implementation class ActionServlet
+ * Servlet implementation class TweetFile
  */
-@WebServlet("/ActionServlet")
-public class ActionServlet extends HttpServlet {
-    
+@WebServlet("/TweetFile")
+public class TweetFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	public static Map<String, String> search(String string) {
+    public TweetFile() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public static Map<String, String> search(String string) {
         
 		Twitter twitter = new TwitterFactory().getInstance();
        
         Map<String, String> movieTweets = new LinkedHashMap<String, String>();
+  
         try {
             Query query = new Query(string);
             QueryResult result;
@@ -56,48 +68,38 @@ public class ActionServlet extends HttpServlet {
         }
         return movieTweets;
     }
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ActionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request,   HttpServletResponse response) throws ServletException, IOException {
-        
-    	String movieName=request.getParameter("moviename");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	if (movieName.contains(":")) {
+		String movieName = request.getParameter("moviename");
+    	
+		if (movieName.contains(":")) {
         	String[] movieSplit = movieName.split(":");
     		movieName = movieSplit[0];
     	}
 		
-        String line = null;
-        List<String> tweets = new ArrayList<String>();
+		Date now = new Date();
+	
+    	Map<String, String> tweets = search(movieName);
+    	
+    	File outputFile = new File(getServletContext().getRealPath("/") + movieName + " Tweets.txt");
+        FileWriter fout = new FileWriter(outputFile);
+    	
         
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(
-        	getServletContext().getRealPath("/") + movieName + " Tweets.txt"));
-        
-        bufferedReader.readLine(); //skipping the date
-        while ((line = bufferedReader.readLine()) != null)
-        {
-        	tweets.add(line);
+        if (tweets.size() > 0) {
+    		fout.write(now + "\r\n");
+        	
+    		for (Map.Entry<String, String> entry : tweets.entrySet()) {
+        		fout.write(entry.getValue() + "\r\n");
+        	}
         }
-      
-        bufferedReader.close();
-        		
-    	     String json = null;
-    	     json = new Gson().toJson(tweets);
-
-    	     response.setContentType("application/json");
-    	     response.setCharacterEncoding("UTF-8");
-    	     response.getWriter().write(json);       
-    	 }
+        
+        fout.close();
+        
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
