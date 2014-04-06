@@ -93,7 +93,8 @@
         <div class="title">
           <h1>Movie</h1>
           <h1>Tweets</h1>
-          <h2>BIRDS TALKING ABOUT FAT CATS: MOVIE REVIEWS</h2>
+          <h2>BIRDS TALKING ABOUT FAT CATS:<br />
+           TWITTER MOVIE REVIEWS</h2>
         </div>
     </div>
     <div class="content">
