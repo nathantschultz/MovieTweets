@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -79,25 +81,49 @@ public class TweetFile extends HttpServlet {
 		if (movieName.contains(":")) {
         	String[] movieSplit = movieName.split(":");
     		movieName = movieSplit[0];
-    	}
+    	}		
 		
-		Date now = new Date();
-	
-    	Map<String, String> tweets = search(movieName);
-    	
-    	File outputFile = new File(getServletContext().getRealPath("/") + movieName + " Tweets.txt");
-        FileWriter fout = new FileWriter(outputFile);
-    	
+		Calendar calendar = Calendar.getInstance();
+	    Date now = calendar.getTime();
+/*	    calendar.add(Calendar.HOUR_OF_DAY, -1);
+	    Date addHours = calendar.getTime();
         
-        if (tweets.size() > 0) {
-    		fout.write(now + "\r\n");
-        	
-    		for (Map.Entry<String, String> entry : tweets.entrySet()) {
-        		fout.write(entry.getValue() + "\r\n");
-        	}
-        }
-        
-        fout.close();
+	    BufferedReader bufferedReader = new BufferedReader(new FileReader(
+            	getServletContext().getRealPath("/") + movieName + " Tweets.txt"));
+        String readTime = bufferedReader.readLine();
+	    bufferedReader.close();
+	    
+	    String expectedPattern = "EEE MMM d HH:mm:ss z yyyy";
+	    SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
+	    
+	    Date fileTime = null;
+		try {
+			fileTime = formatter.parse(readTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    */
+	    Map<String, String> tweets = null;
+	    String lang = "&lang=en";
+	    
+	    tweets = search(movieName + lang);
+    	
+	    if (tweets != null) {
+		    File outputFile = new File(getServletContext().getRealPath("/") + movieName + " Tweets.txt");
+	        FileWriter fout = new FileWriter(outputFile);
+	        
+	    	fout.write(now + "\r\n");
+	    	String line;
+	    	
+			for (Map.Entry<String, String> entry : tweets.entrySet()) {
+	        	line = entry.getValue().replaceAll("\r\n", " ");
+	        	line = line.replaceAll("\n", " "); 
+				fout.write(line + "\r\n");
+	    	}
+	        fout.close();
+	    }
+
         
 	}
 

@@ -27,7 +27,7 @@
            // send off the query
            $.ajax({
             url: url,
-                data: { 
+                data: {
                 	api_key:   apikey,
                 	startDate: today,
                     zip:       zipCode,

@@ -91,7 +91,7 @@ public class ActionServlet extends HttpServlet {
       
         bufferedReader.close();
         		
-    	     String json = null;
+    	     String json = null;		
     	     json = new Gson().toJson(tweets);
 
     	     response.setContentType("application/json");
