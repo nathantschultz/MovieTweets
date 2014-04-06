@@ -1,12 +1,8 @@
 package MovieTweets;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -18,8 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -85,29 +79,10 @@ public class TweetFile extends HttpServlet {
 		
 		Calendar calendar = Calendar.getInstance();
 	    Date now = calendar.getTime();
-/*	    calendar.add(Calendar.HOUR_OF_DAY, -1);
-	    Date addHours = calendar.getTime();
-        
-	    BufferedReader bufferedReader = new BufferedReader(new FileReader(
-            	getServletContext().getRealPath("/") + movieName + " Tweets.txt"));
-        String readTime = bufferedReader.readLine();
-	    bufferedReader.close();
-	    
-	    String expectedPattern = "EEE MMM d HH:mm:ss z yyyy";
-	    SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
-	    
-	    Date fileTime = null;
-		try {
-			fileTime = formatter.parse(readTime);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    */
+
 	    Map<String, String> tweets = null;
-	    String lang = "&lang=en";
 	    
-	    tweets = search(movieName + lang);
+	    tweets = search(movieName);
     	
 	    if (tweets != null) {
 		    File outputFile = new File(getServletContext().getRealPath("/") + movieName + " Tweets.txt");
@@ -123,8 +98,6 @@ public class TweetFile extends HttpServlet {
 	    	}
 	        fout.close();
 	    }
-
-        
 	}
 
 	/**

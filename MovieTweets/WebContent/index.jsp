@@ -15,13 +15,11 @@
  
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  	<script>
-         var url     = "http://data.tmsapi.com/v1/movies/showings";
+         var url     = "http://data.tmsapi.com/v1/theatres/10381/showings";
          var apikey  = "regehcgurp4f3uhzrtej3f3b";
          var d       = new Date();
          var today   = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();         
-         var zipCode = "83440";
-         var radius  = "10";
-
+		
          $(document).ready(function() {
           
            // send off the query
@@ -30,8 +28,6 @@
                 data: {
                 	api_key:   apikey,
                 	startDate: today,
-                    zip:       zipCode,
-                	radius:    radius,
                     jsonp:     "dataHandler"
                    },          
             dataType: "jsonp",
